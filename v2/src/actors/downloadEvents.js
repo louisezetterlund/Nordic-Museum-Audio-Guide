@@ -1,50 +1,19 @@
 import { updateEvents } from "../actions/device";
-require("../containers/cal_get_promise.js")();
+
+import { getCalStr } from "./cal_get_promise";
 
 class DownloadEventsActor {
   constructor(store) {
     this._store = store;
     this._dispatch = store.dispatch;
 
-    // const tenMins = 1000 * 60 * 10;
-    const tenMins = 1000;
-    var count = 0;
+    const period = 1000 * 60 * 10;
+
+    getCal(this._dispatch);
 
     setInterval(async () => {
-      const currentTime = new Date();
-      const currentTimeStr = await currentTime.toISOString();
-      ++count;
-
-      /*       fetch('https://jsonplaceholder.typicode.com/posts/1', {
-      method: 'GET',
-      //Request Type
-        })
-          .then(response => response.json())
-          //If response is in json then in success
-          .then(responseJson => {
-            //Success
-            alert(JSON.stringify(responseJson));
-            console.log(responseJson);
-          })
-          //If response is not in json then in error
-          .catch(error => {
-            //Error
-            alert(JSON.stringify(error));
-            console.error(error);
-          });
-      }
- */
-      resultstr = await getCalStr(false, true);
-
-      this._dispatch(
-        updateEvents({
-          //Download and store the current dates events
-          //as an array of strings
-
-          ["test"]: ["football", resultstr[0]["date"]]
-        })
-      );
-    }, tenMins);
+      getCal(this._dispatch);
+    }, period);
   }
 }
 
@@ -57,3 +26,54 @@ export const downloadEventsActor = store => {
   _downloadEventsActor = new DownloadEventsActor(store);
   return _downloadEventsActor;
 };
+
+async function getCal(dispatch) {
+  debugM = true;
+  dayOnly = false;
+  broken = false;
+  console.log("CALL TO getCal");
+
+  server_connected = true;
+
+  try {
+    resultstr = await getCalStr(debugM, dayOnly, broken);
+    console.log("this is resultstr", resultstr);
+  } catch (e) {
+    console.log("e: ", +e);
+    server_connected = false;
+  }
+
+  if (server_connected) {
+    var i = 0;
+    for (i = 0; i < resultstr.length; i++) {
+      var isEmpty = false;
+      if (resultstr[0].time == "NO_EVENTS") isEmpty = true;
+
+      if (isEmpty) {
+        dispatch(
+          updateEvents({
+            [i]: ["There are no listed events today."]
+          })
+        );
+      } else {
+        if (resultstr[i].time != "")
+          timedate = resultstr[i].date + " - " + resultstr[i].time;
+        else timedate = resultstr[i].date;
+        var title = "\n# " + resultstr[i].title;
+        var desc = resultstr[i].desc;
+        var url = resultstr[i].URL;
+        dispatch(
+          updateEvents({
+            [i]: [title, timedate, desc, url]
+          })
+        );
+      }
+    }
+  } else {
+    dispatch(
+      updateEvents({
+        [0]: ["Cannot reach server. The device is most likely offline."]
+      })
+    );
+  }
+}

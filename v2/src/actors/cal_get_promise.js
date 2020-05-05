@@ -1,5 +1,3 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-
 function processResult(lines, dayOnly) {
   var today = new Date();
   var date_now_f =
@@ -55,45 +53,53 @@ function processResult(lines, dayOnly) {
   if (found_min_one) {
     var final = events;
   } else {
-    var final = "NO_EVENTS";
+    var final = [{ date: "", time: "NO_EVENTS", title: "", desc: "", URL: "" }];
   }
   return final;
 }
 
-module.exports = function() {
-  this.getCalStr = function(debugMode, dayOnly) {
-    return new Promise((resolve, reject) => {
-      var request = new XMLHttpRequest();
-      url = debugMode
-        ? "https://www.calendarlabs.com/ical-calendar/ics/71/Sweden_Holidays.ics"
-        : "https://www.nordiskamuseet.se/calendar/ical/ical/calendar-nordiska-museet.ics";
-      request.open("GET", url, true);
-      var today = new Date();
-      var date_now_f =
-        today.getFullYear() +
-        "-" +
-        ("0" + (today.getMonth() + 1)).slice(-2) +
-        "-" +
-        ("0" + today.getDate()).slice(-2);
-      request.send(null);
-      HAR_HITTAT_VEVENT = false;
-      found_min_one = false;
-      request.onreadystatechange = function() {
-        //checks if response is ready.
-        if (request.readyState === 4 && request.status === 200) {
-          var type = request.getResponseHeader("Content-Type");
+export const getCalStr = function(debugMode, dayOnly, broken) {
+  return new Promise((resolve, reject) => {
+    var request = new XMLHttpRequest();
+    console.log("CAL_GET_PROMISE1");
+    url = debugMode
+      ? "https://www.calendarlabs.com/ical-calendar/ics/71/Sweden_Holidays.ics"
+      : "https://www.nordiskamuseet.se/calendar/ical/ical/calendar-nordiska-museet.ics";
+    if (broken) url = "This is not a proper URL";
+    request.open("GET", url, true);
+    var today = new Date();
+    var date_now_f =
+      today.getFullYear() +
+      "-" +
+      ("0" + (today.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + today.getDate()).slice(-2);
+    request.send(null);
+    request.onreadystatechange = function() {
+      console.log("CAL_GET_PROMISE2");
+      //checks if response is ready. Takes time.
+      setTimeout(function() {
+        reject("TEST ERROR"), 1000;
+      });
+      if (request.readyState === 4 && request.status === 200) {
+        console.log("CAL_GET_PROMISE3");
+        var type = request.getResponseHeader("Content-Type");
+        console.log("CAL_GET_PROMISE4");
 
-          if (type.indexOf("text") !== 1) {
-            var lines = request.responseText.split("\n");
-
-            //this is where we process the data given by request.
-            final = processResult(lines, dayOnly);
-            resolve(final);
-            // END OF: if (type.indexOf("text") !== 1)
-          }
-          // END OF: if (request.readyState === 4 && request.status === 200)
+        if (type.indexOf("text") !== 1) {
+          console.log("CAL_GET_PROMISE5");
+          var to_split = request.responseText;
+          //console.log("this is before split", to_split);
+          var lines = to_split.split("\n");
+          lines.forEach(element => element.replace("\n", "\\n"));
+          //this is where we process the data given by request.
+          final = processResult(lines, dayOnly);
+          resolve(final);
+          // END OF: if (type.indexOf("text") !== 1)
         }
-      };
-    });
-  };
+        // END OF: if (request.readyState === 4 && request.status === 200)
+      } else console.log("got after response ready");
+      //reject(new error("LOLOLOL"));
+    };
+  });
 };
