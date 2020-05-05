@@ -47,14 +47,12 @@ async function getCal(dispatch) {
       if (resultstr[i].time != "")
         timedate = resultstr[i].date + " - " + resultstr[i].time;
       else timedate = resultstr[i].date;
+      var title = "\n# " + resultstr[i].title;
+      var desc = resultstr[i].desc;
+      var url = resultstr[i].URL;
       dispatch(
         updateEvents({
-          [i]: [
-            resultstr[i].title,
-            timedate,
-            resultstr[i].desc,
-            resultstr[i].URL
-          ]
+          [i]: [title, timedate, desc, url]
         })
       );
     }
