@@ -7,7 +7,7 @@ import { bottomPlayer } from "./bottomPlayer";
 import { accessibility } from "./accessibility";
 import { device } from "./device";
 import { searchByNumber } from "./searchByNumber";
-import { calenderEvents } from "./calenderEvents";
+import { calendarEvents } from "./calendarEvents";
 
 const rootReducer = combineReducers({
   beacon,
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
   accessibility,
   device,
   searchByNumber,
-  calenderEvents
+  calendarEvents
 });
 
 export default rootReducer;

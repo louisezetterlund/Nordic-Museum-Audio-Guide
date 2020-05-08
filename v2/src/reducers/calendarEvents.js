@@ -4,7 +4,7 @@ const initialState = {
   events: {}
 };
 
-export function calenderEvents(state = initialState, action) {
+export function calendarEvents(state = initialState, action) {
   switch (action.type) {
     default: {
       return state;

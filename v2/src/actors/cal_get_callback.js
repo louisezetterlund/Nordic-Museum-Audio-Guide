@@ -42,7 +42,6 @@ function processResult(lines, dayOnly) {
       var URL = lines[i].split("URL;TYPE=URI:");
       events[events_i]["URL"] = URL[1].replace("\r", "");
     } else if (lines[i].includes("END:VEVENT") && HAR_HITTAT_VEVENT) {
-      //console.log('_'+events[events_i]["date"]+'_', "IS NOT EQUAL? ", '_'+date_now_f+'_')
       if (dayOnly && events[events_i]["date"] != date_now_f) {
         HAR_HITTAT_VEVENT = false;
       } else {

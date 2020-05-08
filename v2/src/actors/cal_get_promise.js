@@ -40,7 +40,6 @@ function processResult(lines, dayOnly) {
       var URL = lines[i].split("URL;TYPE=URI:");
       events[events_i]["URL"] = URL[1].replace("\r", "");
     } else if (lines[i].includes("END:VEVENT") && HAR_HITTAT_VEVENT) {
-      //console.log('_'+events[events_i]["date"]+'_', "IS NOT EQUAL? ", '_'+date_now_f+'_')
       if (dayOnly && events[events_i]["date"] != date_now_f) {
         HAR_HITTAT_VEVENT = false;
       } else {
@@ -89,7 +88,6 @@ export const getCalStr = function(debugMode, dayOnly, broken) {
         if (type.indexOf("text") !== 1) {
           console.log("CAL_GET_PROMISE5");
           var to_split = request.responseText;
-          //console.log("this is before split", to_split);
           var lines = to_split.split("\n");
           lines.forEach(element => element.replace("\n", "\\n"));
           //this is where we process the data given by request.
@@ -99,7 +97,6 @@ export const getCalStr = function(debugMode, dayOnly, broken) {
         }
         // END OF: if (request.readyState === 4 && request.status === 200)
       } else console.log("got after response ready");
-      //reject(new error("LOLOLOL"));
     };
   });
 };

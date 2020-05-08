@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-
 import { View, StyleSheet, ScrollView, Text, Switch } from "react-native";
-
 import { updateMuseumMode } from "../actions/device";
-
 import Markdown from "react-native-simple-markdown";
-
 import { isRTL, translate } from "../i18n";
 
 import {
@@ -53,89 +48,13 @@ class Calendar extends Component {
   render() {
     const { locale, events, actions } = this.props;
 
-    //Hur vi sparar data
-    // { string: [string]}
-    // map
-    // [string]
-    // .join()
-    // string \n string \n string
-    //var title;
-    var count = 0;
-    var fieldArray = [];
     var eventArray = Object.entries(events);
-    var title = eventArray.title;
-    var desc = "hell2o"; //eventArray[0].desc;
-    console.log("Title is here: " + title);
-
-    //title = Object.entries(events)[0].title;
 
     const eventsNewlineSeperated = eventArray
       .map(([key, value]) => {
         return `${value.filter(Boolean).join("\n\n")}`;
       })
       .join("\n____________________________________________________________\n");
-
-    //    var strings = eventsNewlineSeperated.split("##")
-
-    console.log(eventsNewlineSeperated);
-
-    const markdownStyles = {
-      heading1: {
-        marginTop: 25,
-        ...StyleSheet.flatten(globalStyles.h1),
-        writingDirection: isRTL ? "rtl" : "ltr",
-        textAlign: isRTL ? "right" : "left"
-      },
-      paragraph: {
-        marginTop: 5,
-        ...StyleSheet.flatten(globalStyles.body),
-        writingDirection: isRTL ? "rtl" : "ltr",
-        textAlign: isRTL ? "right" : "left"
-      }
-    };
-    /*  
-    var title = strings[0]
-    var date = strings[1]
-    var desc = strings[2]
-    var url = strings[3]
-    const ShowTitle = () => 
-    <Text
-      style={[
-        { marginTop: 25 },
-          globalStyles.h1,
-          globalStyles.paragraph
-        ]}>
-      {title}
-    </Text>
-    const ShowDate = () =>
-      <Text
-        style={[
-        { marginTop: 5 },
-          globalStyles.body,
-          globalStyles.paragraph
-        ]}>
-        {date}
-      </Text>
-    const ShowDesc = () =>
-      <Text
-        style={[
-        { marginTop: 5 },
-          globalStyles.body,
-          globalStyles.paragraph
-        ]}>
-        {desc}
-      </Text>
-    const ShowURL = () =>
-      <Text
-        style={[
-        { marginTop: 0 },
-          globalStyles.body,
-          globalStyles.paragraph
-        ]}>
-        {url}
-      </Text>
-*/
-    //ShowTitle = ShowTitle + ShowText
 
     return (
       <View style={{ flex: 1 }}>
@@ -162,7 +81,7 @@ const mapStateToProps = state => {
     locale: state.device.locale,
     appVersion: state.device.appVersion,
     museumMode: state.device.museumMode,
-    events: state.calenderEvents.events
+    events: state.calendarEvents.events
   };
 };
 

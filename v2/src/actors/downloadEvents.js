@@ -1,5 +1,4 @@
 import { updateEvents } from "../actions/device";
-
 import { getCalStr } from "./cal_get_promise";
 
 class DownloadEventsActor {
@@ -28,16 +27,14 @@ export const downloadEventsActor = store => {
 };
 
 async function getCal(dispatch) {
-  debugM = true;
-  dayOnly = false;
+  debugM = false;
+  dayOnly = true;
   broken = false;
-  console.log("CALL TO getCal");
 
   server_connected = true;
 
   try {
     resultstr = await getCalStr(debugM, dayOnly, broken);
-    console.log("this is resultstr", resultstr);
   } catch (e) {
     console.log("e: ", +e);
     server_connected = false;
