@@ -1,16 +1,16 @@
-import RNRestart from 'react-native-restart';
+import RNRestart from "react-native-restart";
 
 import {
   setMuseumMode,
   setLocaleAndRTLForReset,
-  setDefaultLocaleAndRTL,
-} from '../appSettings';
+  setDefaultLocaleAndRTL
+} from "../appSettings";
 
-import { audioActor } from '../actors/audio';
+import { audioActor } from "../actors/audio";
 
 // *** Action Types ***
-export const UPDATE_MUSEUM_MODE = 'UPDATE_MUSEUM_MODE';
-export const RESTART_APP = 'RESTART_APP';
+export const UPDATE_MUSEUM_MODE = "UPDATE_MUSEUM_MODE";
+export const RESTART_APP = "RESTART_APP";
 
 // *** Action Creators ***
 export function updateMuseumMode(museumMode) {
@@ -18,7 +18,15 @@ export function updateMuseumMode(museumMode) {
 
   return {
     type: UPDATE_MUSEUM_MODE,
-    museumMode,
+    museumMode
+  };
+}
+
+//Updating the events
+export function updateEvents(newEvents) {
+  return {
+    type: UPDATE_EVENTS,
+    newEvents
   };
 }
 
@@ -32,7 +40,7 @@ export function restartApp(locale) {
       await setLocaleAndRTLForReset({
         locale: setLocale,
         isRTL: setRTL,
-        showWelcomeScreen: true,
+        showWelcomeScreen: true
       });
     } else {
       await setDefaultLocaleAndRTL();
