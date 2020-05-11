@@ -11,6 +11,7 @@ import { audioActor } from "../actors/audio";
 // *** Action Types ***
 export const UPDATE_MUSEUM_MODE = "UPDATE_MUSEUM_MODE";
 export const RESTART_APP = "RESTART_APP";
+export const UPDATE_EVENTS = "UPDATE_EVENTS";
 
 // *** Action Creators ***
 export function updateMuseumMode(museumMode) {
