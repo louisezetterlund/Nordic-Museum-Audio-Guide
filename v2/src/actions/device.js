@@ -11,7 +11,7 @@ import { audioActor } from "../actors/audio";
 // *** Action Types ***
 export const UPDATE_MUSEUM_MODE = "UPDATE_MUSEUM_MODE";
 export const RESTART_APP = "RESTART_APP";
-export const UPDATE_EVENTS = "UPDATE_EVENTS";
+export const UPDATE_EVENTS = "UPDATE_EVENTS"; //Added by KTH project 2020
 
 // *** Action Creators ***
 export function updateMuseumMode(museumMode) {
@@ -23,6 +23,7 @@ export function updateMuseumMode(museumMode) {
   };
 }
 
+// == Calendar functionality. Added by KTH project 2020.
 //Updating the events
 export function updateEvents(newEvents) {
   return {
@@ -30,6 +31,7 @@ export function updateEvents(newEvents) {
     newEvents
   };
 }
+// ==
 
 export function restartApp(locale) {
   return async () => {

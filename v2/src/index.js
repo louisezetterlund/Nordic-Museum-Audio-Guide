@@ -17,7 +17,7 @@ import { showTutorial } from "./actions/tutorial";
 import { audioActor } from "./actors/audio";
 import { chargingActor } from "./actors/charging";
 import { beaconActor } from "./actors/beacon";
-import { downloadEventsActor } from "./actors/downloadEvents";
+import { downloadEventsActor } from "./actors/downloadEvents"; //Calendar functionality. Added by KTH project 2020
 
 import { OFF_BLACK, OFF_WHITE, setBottomTabsHeight } from "./styles";
 
@@ -67,7 +67,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
     device: { locale: setLocale, isRTL: setRTL, appVersion, museumMode }
   });
 
-  downloadEventsActor(store);
+  downloadEventsActor(store); //Calendar functionality. Added by KTH project 2020.
   audioActor(store);
   chargingActor(store);
   beaconActor(store);
@@ -127,22 +127,22 @@ Navigation.events().registerAppLaunchedListener(async () => {
               }
             }
           },
+          // == Calendar functionality. Added by KTH project 2020.
+          // Adds button to go to calendar tab.
           {
-            // Tillagt av Christoffer
-            // En till knapp till menyn, utgår ifrån andra filen browse.
             stack: {
               children: [
                 {
                   component: {
-                    name: "calendar" //länkar till registerScreens
+                    name: "calendar" //Links to registerScreens
                   }
                 }
               ],
               options: {
                 bottomTab: {
-                  text: translate("calendarScreen_Title"), //tillfälligt, behöver ändra, koppla till data/strings
-                  icon: require("../src/assets/calendar.png"), //nya bilder
-                  selectedIcon: require("../src/assets/calendarTabSelected.png"), //behövs uppdateras
+                  text: translate("calendarScreen_Title"),
+                  icon: require("../src/assets/calendar.png"),
+                  selectedIcon: require("../src/assets/calendarTabSelected.png"),
                   textColor: OFF_WHITE,
                   selectedTextColor: "white",
                   fontSize: 12
@@ -150,6 +150,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
               }
             }
           },
+          // ==
           {
             stack: {
               children: [

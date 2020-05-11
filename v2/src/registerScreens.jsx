@@ -16,7 +16,7 @@ import TutorialLanguage from "./containers/tutorialLanguage";
 import AboutMuseum from "./containers/aboutMuseum";
 import AboutApp from "./containers/aboutApp";
 import BottomPlayer from "./containers/bottomPlayer";
-import Calendar from "./containers/calendar"; //inlagd för koppling till container/calendar
+import Calendar from "./containers/calendar"; //Adds calendar functionality. Added by KTH project 2020. Connects container/calendar.
 
 import Analytics from "appcenter-analytics";
 
@@ -168,14 +168,15 @@ const registerScreens = store => {
     }),
     () => BottomPlayer
   );
+  // == Calendar functionality. Added by KTH project 2020.
   Navigation.registerComponent(
-    //inlagd för calendar av Christoffer
     "calendar",
     sceneCreator(Calendar, store, {
       screenName: "calendar"
     }),
     () => Calendar
   );
+  // ==
 };
 
 export default registerScreens;

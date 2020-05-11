@@ -16,6 +16,9 @@ import {
   NAV_BAR_BACKGROUND
 } from "../styles";
 
+//File defines formatting of calendar text in calendar tab
+//Added by KTH project 2020
+
 const styles = StyleSheet.create({
   container: {
     alignItems: "stretch",
@@ -48,14 +51,18 @@ class Calendar extends Component {
   render() {
     const { locale, events, actions } = this.props;
 
+    //Get events from downloadEvents
     var eventArray = Object.entries(events);
 
-    const eventsNewlineSeperated = eventArray
+    //Separates entries from eventArray with new lines for same event and
+    //a separator line for new events
+    const eventsString = eventArray
       .map(([key, value]) => {
-        return `${value.filter(Boolean).join("\n\n")}`;
+        return `${value.filter(Boolean).join("\n\n")}`; //filter skips empty strings
       })
       .join("\n____________________________________________________________\n");
 
+    //Below displays text as markdown
     return (
       <View style={{ flex: 1 }}>
         <View style={[styles.container]}>
@@ -68,7 +75,7 @@ class Calendar extends Component {
             }}
             automaticallyAdjustContentInsets={false}
           >
-            <Markdown>{eventsNewlineSeperated}</Markdown>
+            <Markdown>{eventsString}</Markdown>
           </ScrollView>
         </View>
       </View>

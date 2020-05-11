@@ -1,5 +1,8 @@
 import { UPDATE_EVENTS } from "../actions/device";
 
+//Calendar functionality
+//Added by KTH project 2020
+
 const initialState = {
   events: {}
 };
