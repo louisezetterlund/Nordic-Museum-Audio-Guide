@@ -29,21 +29,57 @@ E-mail: [aron.ambrosiani@nordiskamuseet.se](mailto:aron.ambrosiani@nordiskamusee
 
 The current version of the app resides in the [v2](https://github.com/Ambrosiani/Nordic-Museum-Audio-Guide/tree/master/v2) folder.
 
-1. Install all React Native dependencies following the "React Native CLI Quickstart" instructions: 
-[React Native getting started guide](https://facebook.github.io/react-native/docs/getting-started.html)
+As the only supported platform is iOS, you are required to use macOS in some form. If for some reason your computer has an older version of macOS that doesn't support one or more of the dependencies below, you might be able to force upgrade your computer to a newer version of the OS. Do this at your own risk.
 
 #### iOS
+
+1. Install all React Native dependencies following the "React Native CLI Quickstart" instructions: 
+[React Native getting started guide](https://facebook.github.io/react-native/docs/getting-started.html)
+This amount to the following steps. Note that the steps below are a bit more detailed, but could contain errors compared to the official docs. In doubt consult the documentation.
+  1. Install brew from [Brew.sh](https://brew.sh).
+  2. Install Node v10.15.3. Other versions might work, but this one is stable.
+    ```
+    brew install node
+    ```
+  3. If you don't have the right version of node right away, downgrade it
+    ```
+    sudo npm install -g n
+    sudo n 10.15.3
+    ```
+    You can now check the version of node you have with
+    ```
+    node -v
+    ``` 
+    Which should output 10.15.3
+  4. Install package handlers
+    ```
+    brew install watchman
+    brew install yarn
+    sudo gem install cocoapods
+    ```
+
 Targets: iOS 10.0 or greater
 
 1. Install project dependencies  
   ```
   cd v2 && yarn install && cd ios && pod install && cd ..
   ```  
-2. Run on the iOS simulator  
+2. Ar this point you most likely need an approved Apple developer account logged in to XCode
+3. (Optional) If your files don't have the right permissions set you might run into EACCESS errors when executing the code. To solve this run some form of
+  ```
+  cd src && sudo chmod -R 755 .
+  ```
+  Note that this will flag all files in the src folder as executable and readable by everyone and writeable by the owner of the file. This might also flag all files in the repo as modified by git which can be turned off. Optimally you only want to modify access rights to code files such as .js and .jsx.
+4. Run on the iOS simulator (iOS 10.0 or greater)
   ```
   npx react-native run-ios
   ```
   or use the XCode buttons for building to an appropriate device/simulator.
+
+Some tips:
+- Sometimes when executing the code you might get a bundler error, it might be worth it closing the simulator and bundler and just trying again as this has shown to help.
+- In this project yarn is being used. That means when looking up packages you want to use in the app, you should use yarn install. Many resources tell you to use ``` npm install ``` but this will result in errors.
+
 
 There are two schemes: 
 - `nordicMuseumAudioGuide` is the debug build with hot reloading
@@ -51,7 +87,7 @@ There are two schemes:
 
 #### Android
 
-Work in progress.
+Technically, being React Native, you should be able to run the code for Android without major changes. Despite that, Android is not currently supported and is not trivial to get running.
 
 ### Adding Your Own Data
 
