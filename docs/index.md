@@ -113,14 +113,37 @@ Ruben Niculcea
 #### Development and Design
 
 Ruben Niculcea, Carnegie Institute
+
 Sam Ticknor, Carnegie Institute
+
 Aron Ambrosiani, Nordic Museum
+
 Robert Ziherl, Nordic Museum
+
+#### Development by KTH Project 2020
+
+Alexander Hesseborn
+
+Ann-Catrin Lindkvist
+
+Christoffer Nilsson
+
+Hera Dalianis
+
+Louise Zetterlund
+
+Martin Thulestedt
+
+Oscar Rohde Dahlberg
+
+Jonas Sävås
 
 #### Advisory Team, Nordic Museum
 
 Vanessa Gandy
+
 Loredana Jelmini
+
 Sven Rentzhog
 
 #### App Icon
