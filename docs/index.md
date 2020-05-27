@@ -31,46 +31,49 @@ The current version of the app resides in the [v2](https://github.com/Ambrosiani
 
 As the only supported platform is iOS, you are required to use macOS in some form. If for some reason your computer has an older version of macOS that doesn't support one or more of the dependencies below, you might be able to force upgrade your computer to a newer version of the OS. Do this at your own risk.
 
-#### iOS
+#### iOS (iOS 10.0 or greater)
 
 1. Install all React Native dependencies following the "React Native CLI Quickstart" instructions: 
-[React Native getting started guide](https://facebook.github.io/react-native/docs/getting-started.html)
-This amount to the following steps. Note that the steps below are a bit more detailed, but could contain errors compared to the official docs. In doubt consult the documentation.
-  1. Install brew from [Brew.sh](https://brew.sh).
-  2. Install Node v10.15.3. Other versions might work, but this one is stable.
-    ```
-    brew install node
-    ```
-  3. If you don't have the right version of node right away, downgrade it
-    ```
-    sudo npm install -g n
-    sudo n 10.15.3
-    ```
-    You can now check the version of node you have with
-    ```
-    node -v
-    ``` 
-    Which should output 10.15.3
-  4. Install package handlers
-    ```
-    brew install watchman
-    brew install yarn
-    sudo gem install cocoapods
-    ```
+[React Native getting started guide](https://facebook.github.io/react-native/docs/getting-started.html). For the most part this amount to the steps below. Note that these steps are a bit more detailed, but could contain errors compared to the official docs. In doubt consult the documentation.
+  
+    1. Install brew from [Brew.sh](https://brew.sh).
+    
+    2. Install Node v10.15.3. Other versions might work, but this one is stable.
+      ```
+      brew install node
+      ```
+    3. If you don't have the right version of node right away, downgrade it.
 
-Targets: iOS 10.0 or greater
+      ```
+      sudo npm install -g n
+      sudo n 10.15.3
+      ```
+      You can now check the version of node you have with
+      ```
+      node -v
+      ``` 
+      Which should output 10.15.3
 
-1. Install project dependencies  
+    4. Install package handlers
+      ```
+      brew install watchman
+      brew install yarn
+      sudo gem install cocoapods
+      ```
+      
+2. Install project dependencies  
   ```
   cd v2 && yarn install && cd ios && pod install && cd ..
   ```  
-2. Ar this point you most likely need an approved Apple developer account logged in to XCode
-3. (Optional) If your files don't have the right permissions set you might run into EACCESS errors when executing the code. To solve this run some form of
+3. Ar this point you most likely need an approved Apple developer account logged in to XCode
+
+4. (Optional) If your files don't have the right permissions set you might run into EACCESS errors when executing the code. To solve this run some form of
   ```
   cd src && sudo chmod -R 755 .
   ```
   Note that this will flag all files in the src folder as executable and readable by everyone and writeable by the owner of the file. This might also flag all files in the repo as modified by git which can be turned off. Optimally you only want to modify access rights to code files such as .js and .jsx.
-4. Run on the iOS simulator (iOS 10.0 or greater)
+
+5. Run on the iOS simulator (iOS 10.0 or greater)
   ```
   npx react-native run-ios
   ```
