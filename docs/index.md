@@ -60,7 +60,7 @@ As the only supported platform is iOS, you are required to use macOS in some for
       brew install yarn
       sudo gem install cocoapods
       ```
-      
+
 2. Install project dependencies  
   ```
   cd v2 && yarn install && cd ios && pod install && cd ..
@@ -79,14 +79,14 @@ As the only supported platform is iOS, you are required to use macOS in some for
   ```
   or use the XCode buttons for building to an appropriate device/simulator.
 
-Some tips:
-- Sometimes when executing the code you might get a bundler error, it might be worth it closing the simulator and bundler and just trying again as this has shown to help.
-- In this project yarn is being used. That means when looking up packages you want to use in the app, you should use yarn install. Many resources tell you to use ``` npm install ``` but this will result in errors.
-
-
 There are two schemes: 
 - `nordicMuseumAudioGuide` is the debug build with hot reloading
 - `nordicMuseumAudioGuide-Release` is the release build used for testing and eventually publishing to the App Store.
+
+
+##### Some tips:
+- Sometimes when executing the code you might get a bundler error, it might be worth it closing the simulator and bundler and just trying again as this has shown to help.
+- In this project yarn is being used. That means when looking up packages you want to use in the app, you should use yarn install. Many resources tell you to use ``` npm install ``` but this will result in errors.
 
 #### Android
 
